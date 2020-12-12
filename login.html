@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{url_for('editMenu')}}" method = 'POST'>
+        <p>ID</p>
+        <input type = 'text', name = 'uid'>
+        <p>PW</p>
+        <input type = 'password', name = 'pw'>
+        <input type='submit' value = 'Login/Sign up'><br><br><br><br>
+        </form>
+    </body>
+</html>
