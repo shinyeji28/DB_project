@@ -72,14 +72,14 @@ def detail_info(e,ID3):
     item = db.execute(
         'select * from EXHIBITION where eID=?',(e,)
     ).fetchall()
+    data=db.execute('select cName,content from COMMENT where eID=?',(e,)).fetchall()
     db.close()
-    return render_template('detail.html',items=item,ID4=ID3)
+    return render_template('detail.html',items=item,ID4=ID3,datas=data)
 
 
 @app.route('/comment/<int:eID>/<string:ID5>', methods=['GET', 'POST'])
 def comment(eID,ID5):
     db = sqlite3.connect("DB_project_data.db")
-   # db.row_factory = sqlite3.Row
     c=db.cursor()
     
     data=c.execute('select count(*)+1 from COMMENT').fetchone()
@@ -91,6 +91,8 @@ def comment(eID,ID5):
     return redirect(url_for('detail_info',e=eID,ID3=ID5))
     
 
+
+    
 
 if __name__ == '__main__':
     app.debug = True
