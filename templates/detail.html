@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% for i in items %}
+        {{i.eID }}
+        {{i.currentORfuture }}
+        {{i.place }} 
+        {{i.eName }} </br>
+        {{i.period }}
+        {{i.room }} </br>
+        {{i.childPrice }}
+        {{i.teenPrice }}
+        {{i.adultPrice }} </br></br>
+        <form action="{{url_for('comment', eID = i.eID, com = user_message)}}" method = 'POST'>
+            <ul>
+                <li>
+                    <label for="msg">comment</label>
+                    <textarea id="msg" name="user_message"></textarea>
+                </li>
+                <li class="button">
+                    <button type="submit">upload</button>
+                </li>
+             </ul>
+       </form>
+
+        {% endfor %}
+    </body>
+</html>
