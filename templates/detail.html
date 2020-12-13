@@ -11,7 +11,7 @@
         {{i.childPrice }}
         {{i.teenPrice }}
         {{i.adultPrice }} </br></br>
-        <form action="{{url_for('comment', eID = i.eID, com = user_message)}}" method = 'POST'>
+        <form action="{{url_for('comment', eID = i.eID,ID5=ID4)}}" method = 'POST'>
             <ul>
                 <li>
                     <label for="msg">comment</label>
