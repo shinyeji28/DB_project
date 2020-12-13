@@ -114,12 +114,16 @@ def reserve_accepct(ID8,e):
 
     return redirect(url_for('showexhib',ID=ID8))
 
-#@app.route('/inquiry/<string:ID9>',method=['GET','POST'])
-#def inquiry(ID9):
-#    db = sqlite3.connect("DB_project_data.db")
-#    db.row_factory = sqlite3.Row
-#    c=db.cursor()
-#    datas=c.execute('select * from RESERVATION where uID=?',(ID9,)).fetchall()
+@app.route('/inquiry/<string:ID9>', methods=['GET','POST'])
+def inquiry(ID9):
+    db1 = sqlite3.connect("DB_project_data.db")
+    db1.row_factory = sqlite3.Row
+    c1=db1.cursor()
+    data=c1.execute('select * from RESERVATION R, EXHIBITION E where R.eID=E.eID and R.uID=?',(ID9,)).fetchall()
+    db1.close()
+    
+    return render_template('inquiry.html',ID0=ID9,view=data)
+
     
 @app.route('/aa/<int:e>', methods=['GET', 'POST'])
 def aa(e):
@@ -136,8 +140,8 @@ def aa(e):
     result = int(float(child))*int(childnum)+int(float(teen))*int(teennum)+int(float(adult))*int(adultnum)+int(float(delivery))
     print(result)
     flash(result)
-    return redirect('reserve',results=result,eID=e)
-    #return ('',204)
+   # return render_template('reserve.html',results=result,eID=e)
+    return ('',204)
 
 
 if __name__ == '__main__':
