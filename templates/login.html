@@ -16,7 +16,10 @@
         <input type = 'text', name = 'uid'>
         <p>PW</p>
         <input type = 'password', name = 'pw'>
-        <input type='submit' value = 'Login/Sign up'><br><br><br><br>
+        <input type='submit' value = 'Login'><br>
+        </form>
+        <form action="{{url_for('user_assign')}}" method = 'POST'><br>
+        <p>회원가입하시겠습니까?  <input type='submit' value = 'Sign up'><br></p>
         </form>
     </body>
 </html>
