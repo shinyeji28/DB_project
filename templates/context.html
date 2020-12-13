@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html>
-    
     <body>
         {% for i in items %}
-        {{i.eID }}
-        {{i.currentORfuture }}
-        {{i.place }} 
-        {{i.eName }} </br>
-        {{i.period }}
-        {{i.room }} </br>
-        {{i.childPrice }}
-        {{i.teenPrice }}
-        {{i.adultPrice }} </br></br>
+        <a href='{{url_for('detail_info' , e=i.eID)}}'>{{i.eName}}</a></p>
         {% endfor %}
     </body>
 </html>
+
