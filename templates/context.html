@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <form action="{{url_for('inquiry',ID9=ID2)}}" method = 'POST'>
+            <li class="button">
+                <button type="submit">예매 기록 조회</button>
+            </li>
+        </form>
+
         {% for i in items %}
         <form method = 'POST'>
         <a href="{{url_for('detail_info', e=i.eID, ID3 = ID2)}}">{{i.eName}}</a></p>
         </form>
         {% endfor %}
+      
     </body>
 </html>
