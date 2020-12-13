@@ -2,8 +2,9 @@
 <html>
     <body>
         {% for i in items %}
-        <a href='{{url_for('detail_info' , e=i.eID)}}'>{{i.eName}}</a></p>
+        <form method = 'POST'>
+        <a href="{{url_for('detail_info', e=i.eID, ID3 = ID2)}}">{{i.eName}}</a></p>
+        </form>
         {% endfor %}
     </body>
 </html>
-
