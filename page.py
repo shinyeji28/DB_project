@@ -124,6 +124,9 @@ def reserve_accepct(ID8,e):
     tp = int(request.form['teen'])*int(float(b1))
     ap = int(request.form['adult'])*int(float(c1))
     total = cp+tp+ap
+    if(total==0 or (request.form['child']=="0" and request.form['teen']=="0" and request.form['adult']==0)):
+        flash('정보를 선택해 주세요.')
+        return redirect(url_for('reserve',ID6=ID8,e=e))
     if request.form['ticket']=="0":
         deli="현장 수령"
     else:
