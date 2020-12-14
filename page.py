@@ -96,9 +96,15 @@ def reserve(ID6,e):
     db = sqlite3.connect("DB_project_data.db")
     db.row_factory = sqlite3.Row
     c=db.cursor()
+    d=db.cursor()
     datas=c.execute('select * from USERS where ID=?',(ID6,)).fetchall()
+    datas2=d.execute('select childPrice,teenPrice, adultPrice from EXHIBITION where eID=?',(e,)).fetchone()
+    a,b,c=datas2
+    a=int(float(a))
+    b=int(float(b))
+    c=int(float(c))
     db.close()
-    return render_template('reserve.html',ID7=ID6,userInfo=datas,eID=e)
+    return render_template('reserve.html',ID7=ID6,userInfo=datas,eID=e,ra=a,rb=b,rc=c)
 
 @app.route('/reserve_accepct/<string:ID8>/<int:e>' , methods=['GET','POST'])
 def reserve_accepct(ID8,e):  
@@ -125,25 +131,6 @@ def inquiry(ID9):
     return render_template('inquiry.html',ID0=ID9,view=data)
 
     
-@app.route('/aa/<int:e>', methods=['GET', 'POST'])
-def aa(e):
-    db = sqlite3.connect("DB_project_data.db")
-    #db.row_factory = sqlite3.Row
-    a=db.cursor()
-    data = a.execute('select childPrice,teenPrice, adultPrice from EXHIBITION where eID=?',(e,)).fetchone()
-    db.close()
-    child,teen,adult=data
-    childnum = request.form['child']
-    teennum = request.form['teen']
-    adultnum = request.form['adult']
-    delivery = request.form['ticket']
-    result = int(float(child))*int(childnum)+int(float(teen))*int(teennum)+int(float(adult))*int(adultnum)+int(float(delivery))
-    print(result)
-    flash(result)
-   # return render_template('reserve.html',results=result,eID=e)
-    return ('',204)
-
-
 if __name__ == '__main__':
     app.debug = True
     app.run(host='127.0.0.1', port=5000)
