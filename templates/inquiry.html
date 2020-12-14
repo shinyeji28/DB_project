@@ -7,9 +7,16 @@
             </li>
         </form>
 
-        {% for i in items %}
+        {% for i in view %}
         <form method = 'POST'>
         <a href="{{url_for('detail_info', e=i.eID, ID3 = ID2)}}">{{i.eName}}</a></p>
+        <a>예매자 아이디 : {{i.uID}}</a><br>
+        <a>예매자 이름 : {{i.uName}}</a><br>
+        <a>예매 인원수</a><br>
+        <a>어린이 : {{i.childNum}} 명</a><br>
+        <a>청소년 : {{i.teenNum}} 명</a><br>
+        <a>성인   : {{i.adultNum}} 명</a> <br>
+        <a>총 금액 : {{i.totalPrice}}</a><br><br>
         </form>
         {% endfor %}
       
