@@ -124,10 +124,14 @@ def reserve_accepct(ID8,e):
     tp = int(request.form['teen'])*int(float(b1))
     ap = int(request.form['adult'])*int(float(c1))
     total = cp+tp+ap
+    if request.form['ticket']=="0":
+        deli="현장 수령"
+    else:
+        deli="배송"
     data=c.execute('select count(*)+1 from RESERVATION').fetchone()
     for r in data:
         db.execute('INSERT INTO RESERVATION(rID,uID,eID,childNum,teenNum,adultNum,delivery,totalPrice) values(?,?,?,?,?,?,?,?)'
-        ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],request.form['ticket'],total))
+        ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],deli,total))
     db.commit()
     db.close()
 
@@ -135,13 +139,15 @@ def reserve_accepct(ID8,e):
 
 @app.route('/inquiry/<string:ID9>', methods=['GET','POST'])
 def inquiry(ID9):
-    db1 = sqlite3.connect("DB_project_data.db")
-    db1.row_factory = sqlite3.Row
-    c1=db1.cursor()
-    data=c1.execute('select * from RESERVATION R,USERS U, EXHIBITION E where R.eID=E.eID and R.uID=U.ID and U.ID=?',(ID9,)).fetchall()
-    db1.close()
+    db = sqlite3.connect("DB_project_data.db")
+    db.row_factory = sqlite3.Row
+    c=db.cursor()
+    user=c.execute('select * from USERS where ID=?',(ID9,)).fetchall()
+    data=c.execute('select * from RESERVATION R,USERS U, EXHIBITION E where R.eID=E.eID and R.uID=U.ID and U.ID=?',(ID9,)).fetchall()
+    t_count=c.execute('select count(*) from RESERVATION group by uID having uID=?',(ID9,)).fetchone()
+    db.close()
     
-    return render_template('inquiry.html',ID0=ID9,view=data)
+    return render_template('inquiry.html',ID0=ID9,view=data,users=user,t_count=t_count)
 
     
 if __name__ == '__main__':
