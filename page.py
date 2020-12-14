@@ -112,14 +112,17 @@ def reserve_accepct(ID8,e):
     db.row_factory = sqlite3.Row
     c=db.cursor()
     d=db.cursor()
+    f=db.cursor()
+    birth=f.execute('select birthday from USERS where ID=?',(ID8,)).fetchone()
+    rbirth=''.join(map(str,birth))
+    if int(request.form['birth'])!=int(rbirth) :
+        flash('생년월일이 일치하지 않습니다.')
+        return redirect(url_for('reserve',ID6=ID8,e=e))
     datas2=d.execute('select childPrice,teenPrice, adultPrice from EXHIBITION where eID=?',(e,)).fetchone()
     a1,b1,c1=datas2
-    a1=int(float(a1))
-    b1=int(float(b1))
-    c1=int(float(c1))
-    cp = int(request.form['child'])*a1
-    tp = int(request.form['teen'])*b1
-    ap = int(request.form['adult'])*c1
+    cp = int(request.form['child'])*int(float(a1))
+    tp = int(request.form['teen'])*int(float(b1))
+    ap = int(request.form['adult'])*int(float(c1))
     total = cp+tp+ap
     data=c.execute('select count(*)+1 from RESERVATION').fetchone()
     for r in data:
