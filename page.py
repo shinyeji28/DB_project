@@ -138,7 +138,7 @@ def inquiry(ID9):
     db1 = sqlite3.connect("DB_project_data.db")
     db1.row_factory = sqlite3.Row
     c1=db1.cursor()
-    data=c1.execute('select * from RESERVATION R, EXHIBITION E where R.eID=E.eID and R.uID=?',(ID9,)).fetchall()
+    data=c1.execute('select * from RESERVATION R,USERS U, EXHIBITION E where R.eID=E.eID and R.uID=U.ID and U.ID=?',(ID9,)).fetchall()
     db1.close()
     
     return render_template('inquiry.html',ID0=ID9,view=data)
