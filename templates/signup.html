@@ -2,6 +2,15 @@
 <html>
     <head>
         <h1>회원가입</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         <style>
             h1{
                 padding:auto;
@@ -47,11 +56,11 @@
         <a>Name <input type = 'text', name = 'Name'></a>
         <a>ID <input type = 'text', name = 'uid'></a>
         <a>PW <input type = 'password', name = 'pw'></a>
-        <a>생년월일 <input type = 'int', name = 'birth' placeholder="예) 990123"></a>
-        <a>phone number <input type = 'int', name = 'phone' ></a>
+        <a>생년월일 <input type = 'int', name = 'birth' placeholder="예) 991226"></a>
+        <a>Phone number <input type = 'int', name = 'phone' ></a>
         <a>e-mail <input type = 'email', name = 'email'></a>
         
-        <button class="button" type="submit">Sign up</button>
+        <button class="button" type="submit">submit</button>
     </form>
 </body>
 </html>
