@@ -54,10 +54,13 @@ def save_users():
         value=(request.form['uid'],request.form['pw'])
         data=db.execute(query,value).fetchall()
         db.close()
+        if not (request.form.get('uid') and request.form.get('pw') and request.form.get('Name') and request.form.get('birth') and request.form.get('phone') and request.form.get('email')):
+            flash('정보를 모두 입력해주세요.')
+            return render_template('signup.html') 
         if data:
             flash('이미 존재하는 ID입니다.')
             return redirect(url_for('user_login'))
-        else:
+        else:   
             db = sqlite3.connect("DB_project_data.db") 
             db.row_factory = sqlite3.Row
             db.execute('INSERT INTO USERS(ID,pw,uName,birthday, phoneNumber, eMail) values(?,?,?,?,?,?)'
