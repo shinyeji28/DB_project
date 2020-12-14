@@ -4,7 +4,7 @@
         <h1>회원가입</h1>
         <style>
             h1{
-                padding:15px;
+                padding:auto;
                 text-align:center;
             }
             a{
@@ -27,19 +27,18 @@
                 text-align:center;
             }
             button{
-                margin:25px 0px 0px 722px;
-                display: inline-block;
-                padding: 15px 25px;
-                font-size: 24px;
-                cursor: pointer;
-                text-align: center;
-                text-decoration: none;
-                outline: none;
-                color: #fff;
-                background-color: #38c28d;
-                border: none;
+                margin:10px auto;
+                display:block; 
+                text-align:center; 
+                padding: 10px 25px;
+                font-size: 20px;
+                border:rgb(95, 185, 151)outset;
+                background-color: rgb(56, 194, 141);
+                cursor: pointer; 
+                color:rgb(255, 255, 255); 
+                transition:all 0.9s, color 0.3;
                 border-radius: 15px;
-                box-shadow: 0 9px #999;
+                box-shadow: 2px 5px 5px 0px #999;
             }
         </style>
     </head>
@@ -52,7 +51,6 @@
         <a>phone number <input type = 'int', name = 'phone' ></a>
         <a>e-mail <input type = 'email', name = 'email'></a>
         
-        <!-- <input type='submit' value = 'Sign up'> -->
         <button class="button" type="submit">Sign up</button>
     </form>
 </body>
