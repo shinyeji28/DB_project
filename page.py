@@ -115,7 +115,7 @@ def reserve_accepct(ID8,e):
     f=db.cursor()
     birth=f.execute('select birthday from USERS where ID=?',(ID8,)).fetchone()
     rbirth=''.join(map(str,birth))
-    if int(request.form['birth'])!=int(rbirth) :
+    if (request.form['birth'])!=(rbirth) :
         flash('생년월일이 일치하지 않습니다.')
         return redirect(url_for('reserve',ID6=ID8,e=e))
     datas2=d.execute('select childPrice,teenPrice, adultPrice from EXHIBITION where eID=?',(e,)).fetchone()
