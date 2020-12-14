@@ -111,10 +111,20 @@ def reserve_accepct(ID8,e):
     db = sqlite3.connect("DB_project_data.db")
     db.row_factory = sqlite3.Row
     c=db.cursor()
+    d=db.cursor()
+    datas2=d.execute('select childPrice,teenPrice, adultPrice from EXHIBITION where eID=?',(e,)).fetchone()
+    a1,b1,c1=datas2
+    a1=int(float(a1))
+    b1=int(float(b1))
+    c1=int(float(c1))
+    cp = int(request.form['child'])*a1
+    tp = int(request.form['teen'])*b1
+    ap = int(request.form['adult'])*c1
+    total = cp+tp+ap
     data=c.execute('select count(*)+1 from RESERVATION').fetchone()
     for r in data:
         db.execute('INSERT INTO RESERVATION(rID,uID,eID,childNum,teenNum,adultNum,delivery,totalPrice) values(?,?,?,?,?,?,?,?)'
-        ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],request.form['ticket'],500))
+        ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],request.form['ticket'],total))
     db.commit()
     db.close()
 
