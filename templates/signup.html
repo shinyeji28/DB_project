@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <h1>회원가입</h1>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
+            <script type="text/javascript">
+                alert("{{messages[-1]}}");
+            </script>
         {% endif %}
         {% endwith %}
         <style>
@@ -52,6 +49,8 @@
         </style>
     </head>
 <body>
+    <h1>회원가입</h1>
+
     <form action="{{url_for('save_users')}}" method = 'POST'>
         <a>Name <input type = 'text', name = 'Name'></a>
         <a>ID <input type = 'text', name = 'uid'></a>
