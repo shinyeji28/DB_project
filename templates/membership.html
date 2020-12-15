@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        {% for i in datas %}
+        {{i.ID}}
+        {{i.uName}}
+        {{i.birthday}}
+        {{i.phoneNumber}}
+        {{i.eMail}}
+        {% endfor %}
+
+        <form action="{{url_for('user_delete',ID4=ID3)}}" method = 'POST'>
+            <label>회원 탈퇴하시겠습니까? </label>
+            <button type="submit">탈퇴</button>
+            
+        </form>
+    </body>
+</html>
