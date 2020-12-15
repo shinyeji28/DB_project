@@ -165,6 +165,27 @@ def cancel(e,ID1):
     db.commit()
     db.close()
     return redirect(url_for('inquiry',ID9=ID1))
+
+
+@app.route('/membership/<string:ID9>', methods=['GET','POST'])
+def membership(ID9):
+    db = sqlite3.connect("DB_project_data.db")
+    db.row_factory = sqlite3.Row
+    c=db.cursor()
+    data=c.execute('select * from USERS where ID=?',(ID9,)).fetchall()
+    db.close()
+    return render_template('membership.html',ID3=ID9,datas=data)
+
+
+@app.route('/user_delete/<string:ID4>', methods=['GET','POST'])
+def user_delete(ID4):
+    db = sqlite3.connect("DB_project_data.db")
+    db.execute('delete from USERS where ID=?',(ID4,))
+    db.commit()
+    db.close()
+    return render_template('first.html')
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='127.0.0.1', port=5000)
