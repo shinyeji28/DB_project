@@ -68,13 +68,7 @@
     </head>
     <body>
         <h1>티켓 예매</h1>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <script type="text/javascript">
-            alert("{{messages[-1]}}");
-        </script>
-        {% endif %}
-        {% endwith %}
+
         <table>
             <th><p>인원수 / 수령 방법 선택</p></th>
             <th><p>예매자 확인</p></th>
