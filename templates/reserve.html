@@ -28,9 +28,23 @@
             a[class="name"],[class="bir"],[class="number"],[class="email"]{
                 font-weight: bold;
             }
-            input[type="submit"]{
+            .btn1{
                 display:block; 
-                padding: 20px 20px;
+                padding: 15px 15px;
+                font-size: 20px;
+                border:rgb(95, 185, 151)outset;
+                background-color: rgb(56, 194, 141);
+                text-align:center; 
+                cursor: pointer; 
+                color:rgb(255, 255, 255); 
+                transition:all 0.9s, color 0.3;
+                border-radius: 15px;
+                box-shadow: 2px 5px 2px 0px #999;
+                margin:-10px 0px 110px 800px; 
+            }
+            .btn2{
+                display:block; 
+                padding: 15px 15px;
                 font-size: 20px;
                 border:rgb(95, 185, 151)outset;
                 margin:-50px 0px 10px 1270px; 
@@ -41,7 +55,8 @@
                 transition:all 0.9s, color 0.3;
                 border-radius: 15px;
                 box-shadow: 2px 5px 5px 0px #999;
-                margin: auto;
+                margin:-170px 650px 0px 610px; 
+
             }
             p[class="people"],[class="ticket"]{
                 font-weight: bold;
@@ -134,7 +149,12 @@
 </td>
 </tr>
 </table>
-       <br><br><input type = 'submit'  value = '예매하기' formaction="{{url_for('reserve_accepct',ID8=ID7,e=eID)}}">
+
+       <br><br><input class=btn1 type = 'submit'value = '예매하기' formaction="{{url_for('reserve_accepct',ID8=ID7,e=eID)}}">
+        </form>
+
+        <form  action="{{url_for('detail_info',e=eID,ID3=ID7)}}" method = 'POST'>
+            <button class= btn2 type="submit">돌아가기</button>
         </form>
     </body>
 </html>
