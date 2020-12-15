@@ -9,6 +9,7 @@ USER_NAME="qw"
 
 @app.route('/',methods=['GET','POST'])
 def first_page():    
+    flash('로그아웃 되었습니다.')
     return render_template('first.html')
 
 @app.route('/login',methods=['GET','POST'])
@@ -141,7 +142,7 @@ def reserve_accepct(ID8,e):
         ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],deli,total))
     db.commit()
     db.close()
-
+    flash('예매가 완료되었습니다.')
     return redirect(url_for('showexhib',ID=ID8))
 
 @app.route('/inquiry/<string:ID9>', methods=['GET','POST'])
