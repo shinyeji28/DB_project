@@ -76,13 +76,13 @@
         <a>Name <input type = 'text', name = 'Name'></a>
         <a>ID <input type = 'text', name = 'uid'></a>
         <a>PW <input type = 'password', name = 'pw'></a>
-        <a>생년월일 <input type = 'int', name = 'birth' placeholder="예) 991226"></a>
-        <a>Phone number <input type = 'int', name = 'phone' ></a>
+        <a>생년월일 <input type = 'int', name = 'birth' placeholder="예) 991226" maxlength="6"></a>
+        <a>Phone number <input type = 'int', name = 'phone'maxlength="11" ></a>
         <a>e-mail <input type = 'email', name = 'email'></a>
         
         <button class="b2" type="submit">submit</button>
     </form>
-    <form action="{{url_for('first_page')}}" method = 'POST'>
+    <form action="{{url_for('first_page',flag=0)}}" method = 'POST'>
         <br><button class = "b1"type="submit" value="return">돌아가기</button>
     </form>
 </body>
