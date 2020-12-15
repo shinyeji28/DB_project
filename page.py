@@ -118,6 +118,8 @@ def reserve_accepct(ID8,e):
     c=db.cursor()
     d=db.cursor()
     f=db.cursor()
+    p=db.cursor()
+
     birth=f.execute('select birthday from USERS where ID=?',(ID8,)).fetchone()
     rbirth=''.join(map(str,birth))
     if (request.form['birth'])!=(rbirth) :
@@ -137,9 +139,24 @@ def reserve_accepct(ID8,e):
         deli="현장 수령"
     else:
         deli="배송"
-    data=c.execute('select count(*)+1 from RESERVATION').fetchone()
-    for r in data:
-        db.execute('INSERT INTO RESERVATION(rID,uID,eID,childNum,teenNum,adultNum,delivery,totalPrice) values(?,?,?,?,?,?,?,?)'
+    data=c.execute('select count(*) from RESERVATION').fetchone()
+    idx=p.execute('select rID from RESERVATION').fetchall()
+    for dq in data:
+        r=dq+1
+
+        for i in range(1,dq):
+
+            flag=0
+            for j in idx:
+                for k in j:
+
+                    if i==k:
+                      flag=1
+            if not flag:
+                r=i
+                break  
+
+    c.execute('INSERT INTO RESERVATION(rID,uID,eID,childNum,teenNum,adultNum,delivery,totalPrice) values(?,?,?,?,?,?,?,?)'
         ,(r, ID8,e,request.form['child'],request.form['teen'],request.form['adult'],deli,total))
     db.commit()
     db.close()
