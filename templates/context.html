@@ -62,6 +62,13 @@
             </style>
         </head>
         <body>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <script type="text/javascript">
+                alert("{{messages[-1]}}");
+            </script>
+            {% endif %}
+            {% endwith %}
             <h1>전시 목록</h1>
             <form action="{{url_for('first_page',flag=1)}}" method = 'POST'>
                 <button class="button0" type="submit">Logout</button>
