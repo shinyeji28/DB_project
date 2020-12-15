@@ -7,7 +7,7 @@ app.secret_key = 'abcd'
 
 USER_NAME="qw"
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def first_page():    
     return render_template('first.html')
 
@@ -126,7 +126,8 @@ def reserve_accepct(ID8,e):
     cp = int(request.form['child'])*int(float(a1))
     tp = int(request.form['teen'])*int(float(b1))
     ap = int(request.form['adult'])*int(float(c1))
-    total = cp+tp+ap
+    dp = int(request.form['ticket'])
+    total = cp+tp+ap+dp
     if(total==0 or (request.form['child']=="0" and request.form['teen']=="0" and request.form['adult']==0)):
         flash('정보를 선택해 주세요.')
         return redirect(url_for('reserve',ID6=ID8,e=e))
@@ -183,6 +184,7 @@ def user_delete(ID4):
     db.execute('delete from USERS where ID=?',(ID4,))
     db.commit()
     db.close()
+    flash('탈퇴가 완료 되었습니다.')
     return render_template('first.html')
 
 
