@@ -3,24 +3,35 @@
     <body>
 
         <title >예매 사이트</title>
+        {% if t_count %}
         {% for i in users %}
         {% for j in t_count %}
         <h3><{{i.uName}} ({{i.ID}}) 님의 총 {{j}}건의 예매 기록 내역입니다></h3>
         {% endfor %}
         {% endfor %}
+
         {% for i in view %}
         <form method = 'POST'>
-        <a href="{{url_for('detail_info', e=i.eID, ID3 = ID2)}}">{{i.eName}}</a></p>
    
-        <a> </a>
+        <a href="{{url_for('detail_info', e=i.eID, ID3 = ID0)}}">{{i.eName}}</a></p>
+    
         <a>예매 인원수</a><br>
         <a>어린이 : {{i.childNum}} 명</a><br>
         <a>청소년 : {{i.teenNum}} 명</a><br>
         <a>성인   : {{i.adultNum}} 명</a> <br>
         <a>티켓 수령 방법 : {{i.delivery}}</a><br>
-        <a>총 금액 : {{i.totalPrice}}</a><br><br>
+        <a>총 금액 : {{i.totalPrice}}</a>
+
         </form>
+        <form action="{{url_for('cancel',e=i.eID,ID1=ID0)}}" method = 'POST'>
+            <button type="submit">cancel</button>
+
+        </form>
+
         {% endfor %}
-      
+        {%else%}
+        <h3>예매 정보가 없습니다.</h3>
+        {% endif %}
+     
     </body>
 </html>
