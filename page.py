@@ -150,12 +150,21 @@ def inquiry(ID9):
     c=db.cursor()
     user=c.execute('select * from USERS where ID=?',(ID9,)).fetchall()
     data=c.execute('select * from RESERVATION R,USERS U, EXHIBITION E where R.eID=E.eID and R.uID=U.ID and U.ID=?',(ID9,)).fetchall()
+    t_count=0
     t_count=c.execute('select count(*) from RESERVATION group by uID having uID=?',(ID9,)).fetchone()
+    print(t_count)
     db.close()
     
     return render_template('inquiry.html',ID0=ID9,view=data,users=user,t_count=t_count)
 
-    
+@app.route('/cancel/<int:e>/<string:ID1>', methods=['GET','POST'])
+def cancel(e,ID1):
+    db = sqlite3.connect("DB_project_data.db")
+    db.row_factory = sqlite3.Row    
+    db.execute('delete from RESERVATION where eID=? and uID=?',(e,ID1))
+    db.commit()
+    db.close()
+    return redirect(url_for('inquiry',ID9=ID1))
 if __name__ == '__main__':
     app.debug = True
     app.run(host='127.0.0.1', port=5000)
