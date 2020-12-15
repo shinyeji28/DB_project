@@ -6,10 +6,11 @@ app = Flask(__name__)
 app.secret_key = 'abcd'
 
 USER_NAME="qw"
-
 @app.route('/',methods=['GET','POST'])
-def first_page():    
-    flash('로그아웃 되었습니다.')
+@app.route('/<int:flag>',methods=['GET','POST'])
+def first_page(flag=0):    
+    if flag:
+        flash('로그아웃 되었습니다.')
     return render_template('first.html')
 
 @app.route('/login',methods=['GET','POST'])
