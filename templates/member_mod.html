@@ -58,11 +58,18 @@
             </tr>
             <tr>
                 <td style="font-weight: bold;">Password</td>
-                <td><input type="text", name="pw">
+                <td><input type="password", name="pw">
                 <br><a>비밀번호가 일치하지 않을 시, <br>회원 정보가 수정되지 않습니다.</a></td>
             </tr>
         
         </table>
             <button type="submit">확인</button>
         </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script type="text/javascript">
+                alert("{{messages[-1]}}");
+            </script>
+        {% endif %}
+        {% endwith %}
     </body>
