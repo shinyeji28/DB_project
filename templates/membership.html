@@ -34,11 +34,12 @@
     </head>
     <body>
         <h1>회원 정보 조회</h1>
-        <table>
-            {% for i in datas %}
+        <table class="1">
+        {% for i in datas %}
             <tr>
                 <td style="font-weight: bold;">ID</td>
                 <td>{{i.ID}}</td>
+                
             </tr>
             <tr>
                 <td style="font-weight: bold;">이름</td>
@@ -56,9 +57,18 @@
                 <td style="font-weight: bold;">e-mail</td>
                 <td>{{i.eMail}}</td>
             </tr>
-            {% endfor %}
+
+        {% endfor %}
         </table>
+    
+
+        <form action="{{url_for('modify',ID5=ID3)}}" method="POST">
+            <button type="submit">수정</button>
+        </form>
         
+        
+
+
         <br><br><hr width="50%"><br><br>
         <form action="{{url_for('user_delete',ID4=ID3)}}" method = 'POST'>
             <p>회원 탈퇴하시겠습니까? </p>
