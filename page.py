@@ -214,11 +214,19 @@ def modify(ID5):
 def modifyAccept(ID6):
     db = sqlite3.connect("DB_project_data.db")
     db.row_factory = sqlite3.Row    
-    db.execute('update USERS set uName=?,birthday=?, phoneNumber=? ,eMail=? where ID=? and pw=?'
-        ,( request.form.get('uname'), request.form.get('birth'), request.form.get('phone'), request.form.get('email'),ID6, request.form.get('pw')))
-    db.commit()
-    db.close()
-    return redirect(url_for('membership',ID9=ID6))
+    c=db.cursor()
+    pwCheck=c.execute('select pw from USERS where ID=?',(ID6,)).fetchone()
+    for i in pwCheck:
+        if i==request.form.get('pw'):
+            db.execute('update USERS set uName=?,birthday=?, phoneNumber=? ,eMail=? where ID=? and pw=?'
+                ,( request.form.get('uname'), request.form.get('birth'), request.form.get('phone'), request.form.get('email'),ID6, request.form.get('pw')))
+            db.commit()
+            db.close()
+            return redirect(url_for('membership',ID9=ID6))
+        else:
+            flash('비밀정보가 일치하지 않습니다.')
+            return render_template('member_mod.html',ID3=ID6)
+    
 
 
 
