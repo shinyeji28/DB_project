@@ -150,5 +150,12 @@
         <form  action="{{url_for('detail_info',e=eID,ID3=ID7)}}" method = 'POST'>
             <button class= btn2 type="submit">돌아가기</button>
         </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script type="text/javascript">
+                alert("{{messages[-1]}}");
+            </script>
+        {% endif %}
+        {% endwith %}
     </body>
 </html>
