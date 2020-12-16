@@ -215,6 +215,9 @@ def modifyAccept(ID6):
     db = sqlite3.connect("DB_project_data.db")
     db.row_factory = sqlite3.Row    
     c=db.cursor()
+    if not (request.form.get('uname') and request.form.get('birth') and request.form.get('phone') and request.form.get('email') and request.form.get('pw')):
+        flash('정보를 모두 입력해주세요.')
+        return render_template('member_mod.html',ID3=ID6) 
     pwCheck=c.execute('select pw from USERS where ID=?',(ID6,)).fetchone()
     for i in pwCheck:
         if i==request.form.get('pw'):
