@@ -206,6 +206,21 @@ def user_delete(ID4):
     flash('탈퇴가 완료 되었습니다.')
     return render_template('first.html')
 
+@app.route('/modify/<string:ID5>', methods=['GET','POST'])
+def modify(ID5):
+    return render_template('member_mod.html',ID3=ID5)
+
+@app.route('/modifyAccept/<string:ID6>', methods=['GET','POST'])
+def modifyAccept(ID6):
+    db = sqlite3.connect("DB_project_data.db")
+    db.row_factory = sqlite3.Row    
+    db.execute('update USERS set uName=?,birthday=?, phoneNumber=? ,eMail=? where ID=? and pw=?'
+        ,( request.form.get('uname'), request.form.get('birth'), request.form.get('phone'), request.form.get('email'),ID6, request.form.get('pw')))
+    db.commit()
+    db.close()
+    return redirect(url_for('membership',ID9=ID6))
+
+
 
 if __name__ == '__main__':
     app.debug = True
